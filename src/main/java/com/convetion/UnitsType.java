@@ -6,11 +6,24 @@ import com.sun.istack.internal.NotNull;
  * Created by Sergey on 21.05.2017.
  */
 public class UnitsType {
-    String name;
-    int index;
+    private String name;
+    private int index;
 
     public UnitsType(int index,@NotNull String name) {
         this.index=index;
         this.name=name;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean compare(UnitsType unitsType) {
+        //// TODO: 21.05.2017 Реализовать сравнение
+        return true;
     }
 }
