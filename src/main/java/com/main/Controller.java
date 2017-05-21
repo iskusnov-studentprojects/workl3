@@ -53,6 +53,19 @@ public class Controller {
             }
         });
 
-        //// TODO: 21.05.2017 доделать поля
+        valueTextField.textProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue == "")
+                    resultTextField.setText("");
+                else {
+                    double value = Double.valueOf(newValue);
+                    resultTextField.setText(
+                            String.valueOf(Converter.getInstance().convert(
+                                    value,
+                                    unitsSrcComboBox.getValue(),
+                                    unitsTrgComboBox.getValue())));
+                }
+            }
+        });
     }
 }

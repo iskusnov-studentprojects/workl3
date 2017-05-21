@@ -26,6 +26,6 @@ public class ConverterTest {
     @Test
     public void testConvertSameTypes() throws Exception {
         Units units = new Units("","",0,new UnitsType(0,""));
-        assertEquals(1, Converter.getInstance().convert(1, units, units));
+        assertEquals(1, Converter.getInstance().convert(1, units, units), 0.00001);
     }
 }

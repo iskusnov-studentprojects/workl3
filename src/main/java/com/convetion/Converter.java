@@ -32,4 +32,9 @@ public class Converter {
         //// TODO: 21.05.2017 сделать нередактируемым
         return unitsType;
     }
+
+    public double convert(double value, Units unitsSrc, Units unitsTrg) {
+        //// TODO: 21.05.2017 реализовать перевод
+        return 1;
+    }
 }

@@ -39,4 +39,9 @@ public class Units {
     public String toString() {
         return name;
     }
+
+    public double convertTo(double value, Units units) {
+        //// TODO: 21.05.2017 реализовать перевод
+        return 1;
+    }
 }

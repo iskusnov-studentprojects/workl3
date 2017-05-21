@@ -39,12 +39,12 @@ public class UnitsTest {
     public void testGetIndex() throws Exception {
         int mult = 0;
         Units units = new Units("name", "abbr", mult, new UnitsType(0,""));
-        assertEquals(mult, units.getMultiplier());
+        assertEquals(mult, units.getMultiplier(), 0.000001);
     }
 
     @Test
     public void testConvertToSameType() throws Exception {
         Units units = new Units("","",0,new UnitsType(0,""));
-        assertEquals(1,units.convertTo(1, units));
+        assertEquals(1,units.convertTo(1, units), 0.00001);
     }
 }
