@@ -1,5 +1,7 @@
 package com.convetion;
 
+import com.sun.org.apache.xerces.internal.impl.xs.util.ObjectListImpl;
+
 import java.util.List;
 
 /**
@@ -11,10 +13,13 @@ public class Converter {
     private List<UnitsType> unitsType;
 
     private Converter(){
-
+        units = new ObjectListImpl(null, 0);
+        unitsType = new ObjectListImpl(null, 0);
     }
 
     public static Converter getInstance() {
+        if(instance == null)
+            instance = new Converter();
         return instance;
     }
 
