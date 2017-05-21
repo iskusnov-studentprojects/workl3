@@ -8,7 +8,7 @@ import com.sun.istack.internal.NotNull;
 public class Units {
     private String name;
     private String abbreviation;
-    private int multiplier;
+    private double multiplier;
     private UnitsType type;
 
 
@@ -31,7 +31,12 @@ public class Units {
         return type;
     }
 
-    public int getMultiplier() {
+    public double getMultiplier() {
         return multiplier;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

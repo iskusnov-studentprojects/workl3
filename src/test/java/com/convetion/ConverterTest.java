@@ -22,4 +22,10 @@ public class ConverterTest {
     public void testGetUnitsType() throws Exception {
         assertNotNull(Converter.getInstance().getUnitsType());
     }
+
+    @Test
+    public void testConvertSameTypes() throws Exception {
+        Units units = new Units("","",0,new UnitsType(0,""));
+        assertEquals(1, Converter.getInstance().convert(1, units, units));
+    }
 }

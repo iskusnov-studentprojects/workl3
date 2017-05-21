@@ -24,10 +24,12 @@ public class Converter {
     }
 
     public List<Units> getUnits() {
+        //// TODO: 21.05.2017 сделать нередактируемым
         return units;
     }
 
     public List<UnitsType> getUnitsType() {
+        //// TODO: 21.05.2017 сделать нередактируемым
         return unitsType;
     }
 }

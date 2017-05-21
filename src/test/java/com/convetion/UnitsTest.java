@@ -41,4 +41,10 @@ public class UnitsTest {
         Units units = new Units("name", "abbr", mult, new UnitsType(0,""));
         assertEquals(mult, units.getMultiplier());
     }
+
+    @Test
+    public void testConvertToSameType() throws Exception {
+        Units units = new Units("","",0,new UnitsType(0,""));
+        assertEquals(1,units.convertTo(1, units));
+    }
 }

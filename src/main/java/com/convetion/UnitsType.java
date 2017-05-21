@@ -23,9 +23,16 @@ public class UnitsType {
     }
 
     public boolean compare(UnitsType unitsType) {
+        if(unitsType == null)
+            return false;
         if(unitsType.index==index)
             return true;
         else
             return false;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
