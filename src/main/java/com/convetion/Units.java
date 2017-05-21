@@ -12,7 +12,7 @@ public class Units {
     private UnitsType type;
 
 
-    public Units(@NotNull String name,@NotNull String abbreviation, int multiplier, @NotNull UnitsType type) {
+    public Units(@NotNull String name,@NotNull String abbreviation, double multiplier, @NotNull UnitsType type) {
         this.name=name;
         this.abbreviation=abbreviation;
         this.multiplier=multiplier;

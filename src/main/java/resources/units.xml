@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+	<types>
+		<unitstype index="0" name="Расстояние"/>
+		<unitstype index="1" name="Темпиратура"/>
+	</types>
+	<units>
+		<values name="Метры" abbreviation="м." multiplier="1" type="0"/>
+	</units>
+</config>

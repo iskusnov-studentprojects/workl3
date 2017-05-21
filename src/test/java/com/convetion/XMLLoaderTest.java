@@ -14,7 +14,17 @@ public class XMLLoaderTest {
     }
 
     @Test
+    public void testLoadUnitsTypeNumberRows() throws Exception {
+        assertTrue(XMLLoader.loadUnitsType("src/main/java/resources/units.xml").size() > 0);
+    }
+
+    @Test
     public void testLoadUnits() throws Exception {
         assertNotNull(XMLLoader.loadUnits(""));
+    }
+
+    @Test
+    public void testLoadUnitsNumberRows() throws Exception {
+        assertTrue(XMLLoader.loadUnits("src/main/java/resources/units.xml").size() > 0);
     }
 }
