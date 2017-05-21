@@ -23,7 +23,9 @@ public class UnitsType {
     }
 
     public boolean compare(UnitsType unitsType) {
-        //// TODO: 21.05.2017 Реализовать сравнение
-        return true;
+        if(unitsType.index==index)
+            return true;
+        else
+            return false;
     }
 }
