@@ -1,7 +1,10 @@
 package com.convetion;
 
 import com.sun.org.apache.xerces.internal.impl.xs.util.ObjectListImpl;
+import org.dom4j.DocumentException;
+import org.xml.sax.SAXException;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,25 +15,23 @@ public class Converter {
     private List<Units> units;
     private List<UnitsType> unitsType;
 
-    private Converter(){
-        units = new ObjectListImpl(null, 0);
-        unitsType = new ObjectListImpl(null, 0);
+    private Converter() throws DocumentException, SAXException {
+        units = XMLLoader.loadUnits("src/main/java/resources/units.xml");
+        unitsType = XMLLoader.loadUnitsType("src/main/java/resources/units.xml");
     }
 
-    public static Converter getInstance() {
+    public static Converter getInstance() throws SAXException, DocumentException {
         if(instance == null)
             instance = new Converter();
         return instance;
     }
 
     public List<Units> getUnits() {
-        //// TODO: 21.05.2017 сделать нередактируемым
-        return units;
+        return Collections.unmodifiableList(units);
     }
 
     public List<UnitsType> getUnitsType() {
-        //// TODO: 21.05.2017 сделать нередактируемым
-        return unitsType;
+        return Collections.unmodifiableList(unitsType);
     }
 
     public double convert(double value, Units unitsSrc, Units unitsTrg) {

@@ -47,4 +47,16 @@ public class UnitsTest {
         Units units = new Units("","",0,new UnitsType(0,""));
         assertEquals(1,units.convertTo(1, units), 0.00001);
     }
+
+    @Test
+    public void testGetShiftBefore() throws Exception {
+        Units units = new Units("","",0,new UnitsType(0,""));
+        assertEquals(0, units.getShiftBefore(), 0.001);
+    }
+
+    @Test
+    public void testGetShiftAfter() throws Exception {
+        Units units = new Units("","",0,new UnitsType(0,""));
+        assertEquals(0, units.getShiftAfter(), 0.001);
+    }
 }

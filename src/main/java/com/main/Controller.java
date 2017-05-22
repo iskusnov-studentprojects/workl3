@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
+import org.dom4j.DocumentException;
+import org.xml.sax.SAXException;
 
 /**
  * Created by Sergey on 21.05.2017.
@@ -31,7 +33,7 @@ public class Controller {
     private ComboBox<Units> unitsTrgComboBox;
 
     @FXML
-    void initialize() {
+    void initialize() throws DocumentException, SAXException {
         assert unitsSrcComboBox != null : "fx:id=\"unitsSrcComboBox\" was not injected: check your FXML file 'main.fxml'.";
         assert resultTextField != null : "fx:id=\"resultTextField\" was not injected: check your FXML file 'main.fxml'.";
         assert valueTextField != null : "fx:id=\"valueTextField\" was not injected: check your FXML file 'main.fxml'.";
@@ -44,11 +46,17 @@ public class Controller {
             public void changed(ObservableValue<? extends SingleSelectionModel<UnitsType>> observable, SingleSelectionModel<UnitsType> oldValue, SingleSelectionModel<UnitsType> newValue) {
                 unitsSrcComboBox.getItems().clear();
                 unitsTrgComboBox.getItems().clear();
-                for (Units i: Converter.getInstance().getUnits()) {
-                    if(i.getType().compare(newValue.getSelectedItem())) {
-                        unitsSrcComboBox.getItems().add(i);
-                        unitsTrgComboBox.getItems().add(i);
+                try {
+                    for (Units i: Converter.getInstance().getUnits()) {
+                        if(i.getType().compare(newValue.getSelectedItem())) {
+                            unitsSrcComboBox.getItems().add(i);
+                            unitsTrgComboBox.getItems().add(i);
+                        }
                     }
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (DocumentException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -59,11 +67,17 @@ public class Controller {
                     resultTextField.setText("");
                 else {
                     double value = Double.valueOf(newValue);
-                    resultTextField.setText(
-                            String.valueOf(Converter.getInstance().convert(
-                                    value,
-                                    unitsSrcComboBox.getValue(),
-                                    unitsTrgComboBox.getValue())));
+                    try {
+                        resultTextField.setText(
+                                String.valueOf(Converter.getInstance().convert(
+                                        value,
+                                        unitsSrcComboBox.getValue(),
+                                        unitsTrgComboBox.getValue())));
+                    } catch (SAXException e) {
+                        e.printStackTrace();
+                    } catch (DocumentException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
