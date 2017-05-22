@@ -6,9 +6,9 @@
 		<unitstype index="1" name="Темпиратура"/>
 	</types>
 	<units>
-		<values name="Метры" abbreviation="м." multiplier="1" type="0"/>
-		<values name="Санитиметры" abbreviation="см." multiplier="100" type="0"/>
-		<values name="Километры" abbreviation="км." multiplier="" type="0"/>
-		<values name="Цельсий" abbreviation="C" multiplier="0"
+		<values name="Метры" abbreviation="м." multiplier="1" shiftBefore="0" shiftAfter="0" type="0"/>
+		<values name="Санитиметры" abbreviation="см." multiplier="100" shiftBefore="0" shiftAfter="0" type="0"/>
+		<values name="Километры" abbreviation="км." multiplier="0.001" shiftBefore="0" shiftAfter="0" type="0"/>
+		<values name="Цельсий" abbreviation="C" multiplier="1" shiftBefore="0" shiftAfter="0" type="1"/>
 	</units>
 </config>

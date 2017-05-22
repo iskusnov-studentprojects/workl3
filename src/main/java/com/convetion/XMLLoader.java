@@ -34,7 +34,7 @@ public class XMLLoader {
     }
 
     public static List<Units> loadUnits(String path) throws SAXException, DocumentException {
-        if(path == "")
+        if(path.equals(""))
             return new ObjectListImpl(null, 0);
 
         List<UnitsType> unitsTypes = XMLLoader.loadUnitsType(path);
@@ -47,6 +47,8 @@ public class XMLLoader {
             String name = el.attributeValue("name");
             String abbreviation = el.attributeValue("abbreviation");
             String multiplier = el.attributeValue("multiplier");
+            String shiftBefore = el.attributeValue("shiftBefore");
+            String shiftAfter = el.attributeValue("shiftAfter");
             String typeIndex = el.attributeValue("type");
             int index = Integer.valueOf(typeIndex);
             UnitsType unitsType = unitsTypes.get(0);
@@ -56,7 +58,7 @@ public class XMLLoader {
                     break;
                 }
             }
-            result.add(new Units(name, abbreviation, Double.valueOf(multiplier), unitsType));
+            result.add(new Units(name, abbreviation, Double.valueOf(multiplier), Double.valueOf(shiftBefore), Double.valueOf(shiftAfter),  unitsType));
         }
         return result;
     }
