@@ -63,7 +63,7 @@ public class Controller {
 
         valueTextField.textProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue == "")
+                if(newValue.equals(""))
                     resultTextField.setText("");
                 else {
                     double value = Double.valueOf(newValue);
@@ -76,6 +76,8 @@ public class Controller {
                     } catch (SAXException e) {
                         e.printStackTrace();
                     } catch (DocumentException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

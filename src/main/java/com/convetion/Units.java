@@ -45,8 +45,15 @@ public class Units {
     }
 
     public double convertTo(double value, Units units) throws Exception {
-        //// TODO: 22.05.2017 реализовать перевод
-        return 1;
+        if(!type.compare(units.getType()))
+            throw new Exception("Несовпадение типов");
+        if(name.equals(units.getName()))
+            return value;
+        double lMul = units.getMultiplier(),
+                lSB = units.getShiftBefore(),
+                lSA = units.getShiftAfter();
+        double curInNorm = (value-shiftAfter)/multiplier+shiftBefore;
+        return (curInNorm-lSB)*lMul+lSA;
     }
 
     public double getShiftBefore() {

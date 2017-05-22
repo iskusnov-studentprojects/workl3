@@ -34,8 +34,7 @@ public class Converter {
         return Collections.unmodifiableList(unitsType);
     }
 
-    public double convert(double value, Units unitsSrc, Units unitsTrg) {
-        //// TODO: 21.05.2017 реализовать перевод
-        return 1;
+    public double convert(double value, Units unitsSrc, Units unitsTrg) throws Exception {
+        return unitsSrc.convertTo(value, unitsTrg);
     }
 }
