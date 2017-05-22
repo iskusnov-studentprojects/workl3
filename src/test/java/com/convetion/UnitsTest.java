@@ -57,6 +57,27 @@ public class UnitsTest {
     @Test
     public void testGetShiftAfter() throws Exception {
         Units units = new Units("","",0, 0, 0,new UnitsType(0,""));
-        assertEquals(0, units.getShiftAfter(), 0.001);
+        assertEquals(0, units.getShiftAfter(), 0.01);
+    }
+
+    @Test
+    public void testConvertMetrToArshin() throws Exception {
+        Units metr = new Units("Метры", "м", 1, 0, 0,new UnitsType(0,"Расстояние")),
+                arshin = new Units("Аршины", "а", 1.406, 0, 0,new UnitsType(0,"Расстояние"));
+        assertEquals(14.06, metr.convertTo(10, arshin), 0.01);
+    }
+
+    @Test
+    public void testConvertCelsiiToFaringate() throws Exception {
+        Units celsii = new Units("Цельсий", "C", 1, 0, 0,new UnitsType(0,"Темпиратура")),
+                faringate = new Units("Фарингейт", "F", 1.8, 0, 32,new UnitsType(0,"Темпиратура"));
+        assertEquals(50, celsii.convertTo(10, faringate), 0.01);
+    }
+
+    @Test
+    public void testFaringateToKelvin() throws Exception {
+        Units kelvin = new Units("Кельвин", "C", 1, 0, 273.15, new UnitsType(0,"Темпиратура")),
+                faringate = new Units("Фарингейт", "F", 1.8, 0, 32,new UnitsType(0,"Темпиратура"));
+        assertEquals(260.928, faringate.convertTo(10, kelvin), 0.01);
     }
 }

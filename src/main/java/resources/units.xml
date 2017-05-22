@@ -10,5 +10,7 @@
 		<values name="Санитиметры" abbreviation="см." multiplier="100" shiftBefore="0" shiftAfter="0" type="0"/>
 		<values name="Километры" abbreviation="км." multiplier="0.001" shiftBefore="0" shiftAfter="0" type="0"/>
 		<values name="Цельсий" abbreviation="C" multiplier="1" shiftBefore="0" shiftAfter="0" type="1"/>
+		<values name="Фарингейт" abbreviation="F" multiplier="1.8" shiftBefore="0" shiftAfter="32" type="1"/>
+		<values name="Кельвин" abbreviation="K" multiplier="1" shiftBefore="0" shiftAfter="273.15" type="1"/>
 	</units>
 </config>

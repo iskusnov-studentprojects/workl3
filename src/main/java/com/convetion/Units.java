@@ -44,8 +44,8 @@ public class Units {
         return name;
     }
 
-    public double convertTo(double value, Units units) {
-        //// TODO: 21.05.2017 реализовать перевод
+    public double convertTo(double value, Units units) throws Exception {
+        //// TODO: 22.05.2017 реализовать перевод
         return 1;
     }
 
