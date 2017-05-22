@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import org.dom4j.DocumentException;
 import org.xml.sax.SAXException;
 
+import java.util.Objects;
+
 /**
  * Created by Sergey on 21.05.2017.
  */
@@ -32,54 +34,62 @@ public class Controller {
     @FXML
     private ComboBox<Units> unitsTrgComboBox;
 
-    @FXML
-    void initialize() throws DocumentException, SAXException {
-        assert unitsSrcComboBox != null : "fx:id=\"unitsSrcComboBox\" was not injected: check your FXML file 'main.fxml'.";
-        assert resultTextField != null : "fx:id=\"resultTextField\" was not injected: check your FXML file 'main.fxml'.";
-        assert valueTextField != null : "fx:id=\"valueTextField\" was not injected: check your FXML file 'main.fxml'.";
-        assert unitsTypeComboBox != null : "fx:id=\"unitsTypeComboBox\" was not injected: check your FXML file 'main.fxml'.";
-        assert unitsTrgComboBox != null : "fx:id=\"unitsTrgComboBox\" was not injected: check your FXML file 'main.fxml'.";
-
+    public void init() throws DocumentException, SAXException {
         unitsTypeComboBox.getItems().clear();
         unitsTypeComboBox.getItems().addAll(Converter.getInstance().getUnitsType());
-        unitsTypeComboBox.selectionModelProperty().addListener(new ChangeListener<SingleSelectionModel<UnitsType>>() {
-            public void changed(ObservableValue<? extends SingleSelectionModel<UnitsType>> observable, SingleSelectionModel<UnitsType> oldValue, SingleSelectionModel<UnitsType> newValue) {
-                unitsSrcComboBox.getItems().clear();
-                unitsTrgComboBox.getItems().clear();
-                try {
-                    for (Units i: Converter.getInstance().getUnits()) {
-                        if(i.getType().compare(newValue.getSelectedItem())) {
-                            unitsSrcComboBox.getItems().add(i);
-                            unitsTrgComboBox.getItems().add(i);
-                        }
-                    }
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                } catch (DocumentException e) {
-                    e.printStackTrace();
-                }
+        unitsTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            unitsSrcComboBox.getItems().clear();
+            unitsTrgComboBox.getItems().clear();
+            try {
+                Converter.getInstance().getUnits().stream().filter(i -> i.getType().compare(newValue)).forEach(i -> {
+                    unitsSrcComboBox.getItems().add(i);
+                    unitsTrgComboBox.getItems().add(i);
+                });
+                unitsSrcComboBox.getSelectionModel().selectFirst();
+                unitsTrgComboBox.getSelectionModel().selectFirst();
+            } catch (SAXException | DocumentException e) {
+                e.printStackTrace();
             }
         });
+        unitsTypeComboBox.getSelectionModel().selectFirst();
 
-        valueTextField.textProperty().addListener(new ChangeListener<String>() {
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.equals(""))
-                    resultTextField.setText("");
-                else {
-                    double value = Double.valueOf(newValue);
-                    try {
-                        resultTextField.setText(
-                                String.valueOf(Converter.getInstance().convert(
-                                        value,
-                                        unitsSrcComboBox.getValue(),
-                                        unitsTrgComboBox.getValue())));
-                    } catch (SAXException e) {
-                        e.printStackTrace();
-                    } catch (DocumentException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        ChangeListener<? super Units> listener = (observable, oldValue, newValue) ->{
+            String text = valueTextField.getText();
+            valueTextField.setText("a");
+            valueTextField.setText(text);
+        };
+        unitsSrcComboBox.valueProperty().addListener(listener);
+        unitsTrgComboBox.valueProperty().addListener(listener);
+
+        valueTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.equals("")) {
+                valueTextField.setText("");
+                return;
+            }
+            if(newValue.charAt(newValue.length()-1)=='.') {
+                int t = 0;
+                for (int i = 0; i < newValue.length(); i++)
+                    if(newValue.charAt(i)=='.')
+                        t++;
+                if(t>1 || Objects.equals(oldValue, "")) {
+                    valueTextField.setText(oldValue);
+                    return;
+                }
+            }
+            if(!(newValue.charAt(newValue.length()-1) >= '0' && newValue.charAt(newValue.length()-1) <= '9' || newValue.charAt(newValue.length()-1)=='.')){
+                valueTextField.setText(oldValue);
+                return;
+            }
+            else {
+                double value = Double.valueOf(newValue);
+                try {
+                    resultTextField.setText(
+                            String.valueOf(Converter.getInstance().convert(
+                                    value,
+                                    unitsSrcComboBox.getValue(),
+                                    unitsTrgComboBox.getValue())));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
